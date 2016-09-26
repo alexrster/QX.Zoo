@@ -1,0 +1,9 @@
+﻿{
+    "extensions": {
+        "mandatory": [
+            {
+                "name": "EditorConfig"
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://schemas.microsoft.com/2011/01/fabric">
+    
+    <Section Name="AsyncBus">
+        <Parameter Name="ActionsEntity" Value="zoo/actions" />
+    </Section>
+    
+    <Section Name="RabbitMQ">
+        <Parameter Name="hostnames" Value="localhost" />
+        <Parameter Name="port" Value="5672" />
+        <Parameter Name="userName" Value="guest" />
+        <Parameter Name="password" Value="guest" />
+        <Parameter Name="some" Value="something"/>
+    </Section>
+</Settings>

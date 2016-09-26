@@ -2,7 +2,9 @@
   "userSecretsId": "aspnet-QX.Zoo.FabricService-02f02a32-a38c-47f0-a3a1-f8cebc9d9b45",
 
   "dependencies": {
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
@@ -15,7 +17,11 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.ServiceFabric": "5.1.163",
     "Microsoft.ServiceFabric.Data": "2.1.163",
-    "Microsoft.ServiceFabric.Services": "2.1.163"
+    "Microsoft.ServiceFabric.Services": "2.1.163",
+    "QX.Zoo.Runtime": "1.0.0-*",
+    "QX.Zoo.Talk": "1.0.0-*",
+    "QX.Zoo.Talk.RabbitMQ": "1.0.0-*",
+    "QX.Zoo.Tests": "1.0.0-*"
   },
 
   "tools": {
@@ -23,7 +29,7 @@
   },
 
   "frameworks": {
-    "net452": { }
+    "net46": { }
   },
 
   "buildOptions": {
@@ -37,6 +43,7 @@
       "Views",
       "Areas/**/Views",
       "appsettings.json",
+      "rabbit.json",
       "web.config"
     ]
   },

@@ -1,0 +1,28 @@
+{
+  "title": "QX Fabric Host",
+  "dependencies": {
+    "Microsoft.AspNetCore.Http": "1.0.0",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.ServiceFabric": "5.1.163",
+    "Microsoft.ServiceFabric.Data": "2.1.163",
+    "Microsoft.ServiceFabric.Services": "2.1.163",
+    "QX.Zoo.Runtime": "1.0.0-*",
+    "QX.Zoo.Tests": "1.0.0-*",
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+    "Microsoft.ApplicationInsights.TraceListener": "2.1.0",
+    "Microsoft.Extensions.Logging.TraceSource": "1.0.0"
+  },
+
+  "frameworks": {
+    "net46": { }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true,
+    "define": [ "DEBUG", "TRACE" ]
+  },
+}

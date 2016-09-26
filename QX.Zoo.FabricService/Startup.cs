@@ -1,23 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility;
+using QX.Zoo.Runtime.Toys;
+using QX.Zoo.Talk.MessageBus;
+using QX.Zoo.Talk.RabbitMQ;
 
 namespace QX.Zoo.FabricService
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddRabbitJsonFile();
 
             if (env.IsDevelopment())
             {
@@ -26,29 +31,33 @@ namespace QX.Zoo.FabricService
             }
 
             builder.AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+            services.AddLogging()
+                .AddSingleton<IAsyncBusBroker>(ctx => new RabbitMQBroker(Configuration.GetRabbitMQConfiguration(), new OperationScopeProvider(), ctx.GetService<ILoggerFactory>().CreateLogger("RabbitMQBroker")))
+                .AddSingleton(ctx => ctx.GetRequiredService<IAsyncBusBroker>().GetEntity(Configuration["AsyncBus:ActionsEntity"]))
+                .AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory
+                .AddConsole(Configuration.GetSection("Logging"))
+                .AddDebug();
+            
+            app.ServerFeatures.Set(loggerFactory);
 
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 Authority = Configuration["Authentication:AzureAd:AADInstance"] + Configuration["Authentication:AzureAd:TenantId"],
                 Audience = Configuration["Authentication:AzureAd:Audience"]
             });
+
+            app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }

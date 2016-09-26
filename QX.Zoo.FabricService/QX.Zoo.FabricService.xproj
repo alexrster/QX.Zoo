@@ -15,6 +15,7 @@
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
     <WebProject_DirectoryAccessLevelKey>1</WebProject_DirectoryAccessLevelKey>
+    <ApplicationInsightsResourceId>/subscriptions/421bd03f-8018-449e-8d03-e42047b94772/resourcegroups/QX.Zoo.Fabric/providers/microsoft.insights/components/QX.Zoo.Fabric</ApplicationInsightsResourceId>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet.Web\Microsoft.DotNet.Web.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

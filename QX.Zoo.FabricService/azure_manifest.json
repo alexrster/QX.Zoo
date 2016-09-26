@@ -1,0 +1,96 @@
+{
+  "appId": "9d8a9621-5a0b-4915-9d2c-aed6920f2eb2",
+  "appRoles": [
+    {
+      "id": "2eaae706-158e-498c-a268-ef55b5bafb94",
+      "displayName": "QX Zoo - Service Application",
+      "description": "QX Zoo Role for SPI's",
+      "isEnabled": true,
+      "value": "qx_zoo_spi",
+      "allowedMemberTypes": [ "Application" ]
+    },
+    {
+      "id": "e130cac9-00c6-4aec-827f-428f98d155dc",
+      "displayName": "QX Zoo - Administrators",
+      "description": "QX Zoo Administrators",
+      "isEnabled": true,
+      "value": "qx_zoo_administrators",
+      "allowedMemberTypes": [ "User" ]
+    },
+    {
+      "id": "4b619b3e-a2d2-4440-ab69-dfb062848ce4",
+      "displayName": "QX Zoo - Users",
+      "description": "QX Zoo Users",
+      "isEnabled": true,
+      "value": "qx_zoo_users",
+      "allowedMemberTypes": [ "User" ]
+    }
+  ],
+  "availableToOtherTenants": true,
+  "displayName": "QX.Zoo.FabricService",
+  "errorUrl": null,
+  "groupMembershipClaims": null,
+  "homepage": "https://localhost:44325/signin-oidc",
+  "identifierUris": [
+    "https://qx.zone/QX.Zoo"
+  ],
+  "keyCredentials": [],
+  "knownClientApplications": [],
+  "logoutUrl": null,
+  "oauth2AllowImplicitFlow": false,
+  "oauth2AllowUrlPathMatching": false,
+  "oauth2Permissions": [
+    {
+      "adminConsentDescription": "Allow the application to access QX.Zoo.FabricService on behalf of the signed-in user.",
+      "adminConsentDisplayName": "Access QX.Zoo.FabricService",
+      "id": "fb1aa8fb-fdd2-40b2-9ebe-2b00d903c05c",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Allow the application to access QX.Zoo.FabricService on your behalf.",
+      "userConsentDisplayName": "Access QX.Zoo.FabricService",
+      "value": "user_impersonation"
+    }
+  ],
+  "oauth2RequirePostResponse": false,
+  "passwordCredentials": [
+    {
+      "customKeyIdentifier": null,
+      "endDate": "2017-08-26T16:55:28.3510324Z",
+      "keyId": "80ab591a-823e-4e5f-a13a-fccfb71ae901",
+      "startDate": "2016-08-26T16:55:28.3510324Z",
+      "value": null
+    }
+  ],
+  "publicClient": false,
+  "replyUrls": [
+    "https://localhost:44325/signin-oidc"
+  ],
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "00000002-0000-0000-c000-000000000000",
+      "resourceAccess": [
+        {
+          "id": "a42657d6-7f20-40e3-b6f0-cee03008a62a",
+          "type": "Scope"
+        },
+        {
+          "id": "311a71cc-e848-46a1-bdf8-97ff7156d8e6",
+          "type": "Scope"
+        }
+      ]
+    }
+  ],
+  "samlMetadataUrl": null,
+  "extensionProperties": [],
+  "objectType": "Application",
+  "objectId": "ae74f579-6ae7-4477-b2de-441edb88e395",
+  "deletionTimestamp": null,
+  "createdOnBehalfOf": null,
+  "createdObjects": [],
+  "manager": null,
+  "directReports": [],
+  "members": [],
+  "memberOf": [],
+  "owners": [],
+  "ownedObjects": []
+}

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceManifest Name="QX.Zoo.FabricHostPkg"
+                 Version="1.0.1"
+                 xmlns="http://schemas.microsoft.com/2011/01/fabric"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <Description>QX Accumulating Factory Host</Description>
+    
+    <ServiceTypes>
+        <StatelessServiceType ServiceTypeName="QX.Zoo.FabricHost" />
+    </ServiceTypes>
+
+    <CodePackage Name="Code" Version="1.1.0">
+        <EntryPoint>
+            <ExeHost>
+                <Program>QX.Zoo.FabricHost.exe</Program>
+                <WorkingFolder>CodePackage</WorkingFolder>
+            </ExeHost>
+        </EntryPoint>
+    </CodePackage>
+
+    <ConfigPackage Name="Config" Version="1.0.1" />
+
+    <Resources />
+
+</ServiceManifest>
