@@ -7,14 +7,14 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace QX.Zoo.FabricService
+namespace QX.Zoo.FabricServiceV2
 {
     public class Program
     {
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            ServiceRuntime.RegisterServiceAsync("FabricServiceType", context => new WebHostingService(context, "ServiceEndpoint")).GetAwaiter().GetResult();
+            ServiceRuntime.RegisterServiceAsync("FabricServiceV2Type", context => new WebHostingService(context, "ServiceEndpoint")).GetAwaiter().GetResult();
 
             Thread.Sleep(Timeout.Infinite);
         }
@@ -27,7 +27,6 @@ namespace QX.Zoo.FabricService
             private readonly string _endpointName;
 
             private IWebHost _webHost;
-            private string _serverUrl;
 
             public WebHostingService(StatelessServiceContext serviceContext, string endpointName)
                 : base(serviceContext)
@@ -39,10 +38,7 @@ namespace QX.Zoo.FabricService
 
             protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
             {
-                var endpoint = FabricRuntime.GetActivationContext().GetEndpoint(_endpointName);
-                _serverUrl = $"{endpoint.Protocol}://{FabricRuntime.GetNodeContext().IPAddressOrFQDN}:{endpoint.Port}";
-
-                return new[] { new ServiceInstanceListener(_ => this, _serverUrl) };
+                return new[] { new ServiceInstanceListener(_ => this) };
             }
 
             #endregion StatelessService
@@ -63,20 +59,22 @@ namespace QX.Zoo.FabricService
 
             Task<string> ICommunicationListener.OpenAsync(CancellationToken cancellationToken)
             {
+                var endpoint = FabricRuntime.GetActivationContext().GetEndpoint(_endpointName);
+
+                string serverUrl = $"{endpoint.Protocol}://{FabricRuntime.GetNodeContext().IPAddressOrFQDN}:{endpoint.Port}";
+
                 _webHost = new WebHostBuilder().UseKestrel()
                                                .UseContentRoot(Directory.GetCurrentDirectory())
                                                .UseStartup<Startup>()
-                                               .UseUrls(_serverUrl)
+                                               .UseUrls(serverUrl)
                                                .Build();
 
                 _webHost.Start();
 
-                return Task.FromResult(_serverUrl);
+                return Task.FromResult(serverUrl);
             }
 
             #endregion ICommunicationListener
         }
     }
-
-
 }
